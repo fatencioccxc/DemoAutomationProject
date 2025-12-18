@@ -2,7 +2,6 @@ import {test, Browser, TestInfo } from "@playwright/test";
 import { AppConstants } from "@src/constant/AppConstants";
 import { BasePage } from "@src/pages/BasePage";
 import { LandingPage } from "@src/pages/LandingPage";
-import { resolve } from "path";
 
 export async function login(landingPage: LandingPage): Promise<void> {
     await landingPage.login(
