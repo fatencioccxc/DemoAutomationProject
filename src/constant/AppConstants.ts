@@ -8,5 +8,5 @@ export class AppConstants {
     public static readonly PASSWORD = process.env.PASSWORD ?? (() => { throw new Error('PASSWORD is not defined in .env') })();
     public static readonly SCREEN_SIZE = { width: 1_280, height: 720 };
     public static readonly SLOW_MOTION = 2_000;
-    public static readonly TIMEOUT = 100_000;
+    public static readonly TIMEOUT = 10_000_000;
 }

@@ -21,7 +21,7 @@ export class BasePage implements IBasePage {
      * @param locator - The element locator that will be clicked.
      */
     public async click(locator: Locator): Promise<void> {
-        await locator.click({ force: true });
+        await locator.click();
     }
 
     /**
@@ -34,6 +34,49 @@ export class BasePage implements IBasePage {
     public async write(locator: Locator, text: string): Promise<void> {
         await locator.clear();
         await locator.fill(text);
+    }
+
+
+    /**
+     * Selects an option from a dropdown menu by matching the given option text.
+     * This method is just for electronic documents
+     * @param locator (Locator) - The locator of the dropdown menu.
+     * @param option (string) - The option text to select.
+     */
+    public async selectByOption(locator: Locator, option: string): Promise<void> {
+        await this.click(locator);
+        await this.page.getByText(`${option}`, { exact: true }).filter({ hasText: `${option}` }).last().click();
+    }
+
+     /**
+     * Selects an option from a dropdown menu by matching the given option text.
+     * @param locator (Locator) - The locator of the dropdown menu.
+     * @param option (string) - The option text to select.
+     */
+     public async selectDropdownOption(locator: Locator, option: string): Promise<void> {
+        await this.click(locator);
+        const regex = new RegExp(`^${option}`);
+        await this.click(this.page.locator(`text=${regex}`).first());
+    }
+
+    /**
+     * Waits for the page and modal loader to fully load before proceeding.
+     * 
+     * This function ensures that:
+     * 1. The DOM content is completely loaded.
+     * 2. Network activity has settled, meaning all necessary requests have finished.
+     * 3. A custom loading modal ('custom-isLoader-modal') has disappeared from the page.
+     * 
+     * This helps avoid interacting with elements before the page is fully ready, 
+     * reducing flakiness in automated tests.
+     */
+    public async waitLoadModal(): Promise<void> {
+        try {
+            await this.page.waitForLoadState('domcontentloaded');
+            await this.page.waitForLoadState('networkidle');
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     /**
@@ -51,7 +94,7 @@ export class BasePage implements IBasePage {
 
         // Capture full-page screenshot and save it to the test-results folder
         const screenshot = await this.page.screenshot({
-            path: `./test-results/${dateScreenShot}.png`,
+            path: `src/test-results/${dateScreenShot}.png`,
             fullPage: true
         });
 

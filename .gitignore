@@ -40,3 +40,4 @@ test-results
 .cache/
 .eslintcache
 screenshots/
+src\test-results

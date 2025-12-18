@@ -1,12 +1,12 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "@src/pages/BasePage";
-import { homePageLocators } from "@src/pages/Locators";
+import { homePageLocators } from "@src/pages/pageLocators/Locators";
 import { IHomePage } from "@src/pages/interfaces/IPages";
 
 export class HomePage extends BasePage implements IHomePage {
 
     // Locator for the operations table name displayed on the home page
-    public readonly operationsTableName: Locator;
+    public readonly welcomeSpanText: Locator;
 
     /**
      * Creates a new HomePage instance and initializes all page locators.
@@ -18,6 +18,6 @@ export class HomePage extends BasePage implements IHomePage {
         super(page);
 
         // Initialize the locator for the operations table name using the predefined selector
-        this.operationsTableName = page.locator(homePageLocators.OPERATIONS_TABLE_NAME);
+        this.welcomeSpanText = page.locator(homePageLocators.WELCOME_SPAN);
     }
 }

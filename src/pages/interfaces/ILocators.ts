@@ -6,7 +6,10 @@ export interface ILandingPageLocators {
 }
 
 export interface IHomePageLocators {
-    OPERATIONS_TABLE_NAME: string;
+    WELCOME_SPAN: string;
+}
+
+export interface IOperationsTablePageLocators {
     SUPPORT_DOCUMENT_MENU_LINK: string;
     CREATE_SUPPORT_DOCUMENT_MENU_LINK: string;
     EMITTED_DOCUMENTS_REPORT_MENU_LINK: string;
@@ -37,5 +40,8 @@ export interface ISupportDocumentPageLocators {
     DELIVERY_COST_INPUT: string;
     PAYMENT_METHOD_SELECT: string;
     PAYMENT_METHOD_SELECT_OPTION: string;
+    PREVIEW_BUTTON: string;
     TRANSMIT_BUTTON: string;
+    SUCCESS_MODAL: string;
+    SUCCESS_MODAL_NEXT_BUTTON: string;
 }
