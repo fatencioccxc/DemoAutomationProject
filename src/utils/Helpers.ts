@@ -28,10 +28,14 @@ export async function afterTest(testInfo: TestInfo, basePage: BasePage): Promise
     );
 }
 
-export async function extractDocumentNumber(text: string): Promise<string> {
+export async function extractDocumentNumber(text: string): Promise<string | null> {
     const match = new RegExp(/el número (\d+)/).exec(text);
-    console.log(`Document number: ${match[1]}`);
-    return  match ? match[1] : null;
+    if (match) {
+        console.log(`Document number: ${match[1]}`);
+        return match[1];
+    }
+    console.log('No document number found.');
+    return null;
 }
 
 export async function sleep(ms: number): Promise<void> {

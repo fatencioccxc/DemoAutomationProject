@@ -42,7 +42,8 @@ test.describe('Support document feature', async () => {
 
         await test.step('Fill support document form', async () => {
             await supportDocumentPage.createSupportDocument();
-            supportDocumentNumber = await extractDocumentNumber(await supportDocumentPage.successModal.textContent());
+            const modalText = await supportDocumentPage.successModal.textContent() || '';
+            supportDocumentNumber = (await extractDocumentNumber(modalText)) || '';
         });
 
         await test.step('Validating expected modal', async () => { 
